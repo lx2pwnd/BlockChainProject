@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BlockChainClient": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
