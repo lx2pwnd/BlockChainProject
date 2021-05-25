@@ -17,7 +17,7 @@ namespace BlockChainAPI.Controllers
         }
 
         [HttpGet]
-        [Route("currentblock")]
+        [Route("GetCurrentBlock")]
         public object Get()
         {
             try
@@ -28,10 +28,9 @@ namespace BlockChainAPI.Controllers
                 {
                     connection.Open();
 
-                    String sql = "SELECT TOP 1 * " +
+                    String sql = "SELECT * " +
                         "FROM [BlockChainProject].dbo.[Block_Values] " +
-                        "WHERE IsGenerated = 0 " +
-                        "ORDER BY BlockNumberID ASC";
+                        "WHERE [Current] = 1 ";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -42,9 +41,8 @@ namespace BlockChainAPI.Controllers
                                 return new Block()
                                 {
                                     BlockValueString = reader["BlockValueString"].ToString(),
-                                    BlockNumberID = Convert.ToInt32(reader["BlockNumberID"]),
-                                    SaltUsing = Convert.ToInt32(reader["SaltUsing"]),
-                                    IsGenerated = Convert.ToBoolean(reader["IsGenerated"])
+                                    Current = Convert.ToBoolean(reader["Current"]),
+                                    Generated = Convert.ToBoolean(reader["Generated"])
                                 };
                             }
                         }
