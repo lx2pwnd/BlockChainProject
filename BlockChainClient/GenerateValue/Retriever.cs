@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BlockChainClient.GenerateValue
@@ -116,10 +117,10 @@ namespace BlockChainClient.GenerateValue
 
                 var encryptedChar = alphabet.FirstOrDefault(x => x.Key == index + salt).Value;
 
-                encryptedString = String.Concat(encryptedString, encryptedChar);
+                encryptedString = string.Concat(encryptedString, encryptedChar);
             }
 
             return encryptedString;
-        }
+        }      
     }
 }

@@ -1,18 +1,31 @@
 ﻿using BlockChainClient.GenerateValue;
-using System;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace BlockChainClient
 {
     class Program
     {
-        static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            var cifrario = new Retriever()
-                .EncriptString(ConfigurationManager.AppSettings["FirstString"]);
-
-            Console.WriteLine(cifrario);
-            Console.ReadLine();
+            var host = CreateHostBuilder(args).Build();
+            await host.RunAsync();
         }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddSingleton<IRetriever, Retriever>();
+                    services.AddHostedService<Startup>();//servizio
+                })
+                 .ConfigureAppConfiguration((context, configuration) => //configuration
+                 {
+                     configuration.AddJsonFile($"appsetting.{context.HostingEnvironment.EnvironmentName}.json").Build();
+                 })
+            ;
     }
 }
