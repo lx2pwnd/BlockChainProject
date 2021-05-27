@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace BlockChainClient
@@ -19,12 +20,16 @@ namespace BlockChainClient
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton<IRetriever, Retriever>();
-                    services.AddHostedService<Startup>();//servizio
+                    services.AddHostedService<Startup>();
                 })
-                 .ConfigureAppConfiguration((context, configuration) => //configuration
-                 {
-                     configuration.AddJsonFile($"appsetting.{context.HostingEnvironment.EnvironmentName}.json").Build();
-                 })
+                .ConfigureLogging(logging =>
+                {
+                    logging.SetMinimumLevel(LogLevel.Information);
+
+                }).ConfigureAppConfiguration((context, configuration) =>
+    {
+        configuration.AddJsonFile($"appsetting.{context.HostingEnvironment.EnvironmentName}.json").Build();
+    })
             ;
     }
 }

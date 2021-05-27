@@ -1,7 +1,7 @@
 ﻿using BlockChainClient.GenerateValue;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using System;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,20 +11,22 @@ namespace BlockChainClient
     {
         private readonly IRetriever _retriever;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<Startup> _logger;
 
-        public Startup(IConfiguration configuration, IRetriever retriever) => (_configuration, _retriever) = (configuration, retriever);
+        public Startup(ILogger<Startup> logger, IConfiguration configuration, IRetriever retriever) => 
+            (_logger,_configuration, _retriever) = (logger,configuration, retriever);
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine("Start");
+            _logger.LogInformation("Start");
             _retriever.EncriptString(_configuration.GetSection("BlockChain")["FirstString"]);
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine("Stop");
-            return Task.FromResult(0);
+            _logger.LogInformation("Stop");
+            return Task.CompletedTask;
         }
     }
 }
