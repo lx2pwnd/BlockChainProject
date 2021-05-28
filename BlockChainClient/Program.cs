@@ -20,7 +20,7 @@ namespace BlockChainClient
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton<IRetriever, Retriever>();
-                    services.AddHostedService<Startup>();
+                    services.AddHostedService<TimedHostedService>();
                 })
                 .ConfigureLogging(logging =>
                 {
