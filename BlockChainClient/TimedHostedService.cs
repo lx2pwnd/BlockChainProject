@@ -36,6 +36,14 @@ namespace BlockChainClient
 
             var valueToEncrypt = _configuration.GetSection("BlockChain")["FirstString"];
 
+            //using (var httpClient = new HttpClient())
+            //{
+            //    var endpoint = "http://localhost:5555/BlockChainApiRetriever/GetCurrentBlock";
+            //    var response1 = await httpClient.GetAsync(endpoint);
+            //    var content = await response1.Content.ReadAsStringAsync();
+            //    _logger.LogInformation(generatedValue.EncriptString(content));
+            //}
+
             _logger.LogInformation(generatedValue.EncriptString(valueToEncrypt));
         }
 
