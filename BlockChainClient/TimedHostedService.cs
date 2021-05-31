@@ -21,8 +21,7 @@ namespace BlockChainClient
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
-            _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(5));
+            _timer = new Timer(DoWork, null, TimeSpan.Zero,TimeSpan.FromSeconds(5));
 
             return Task.CompletedTask;
         }
@@ -36,10 +35,9 @@ namespace BlockChainClient
             var generatedValue = new Retriever();
 
             var valueToEncrypt = _configuration.GetSection("BlockChain")["FirstString"];
-
+            var endpoint = "http://blockchain-api/BlockChainApiRetriever/GetCurrentBlock";
             using (var httpClient = new HttpClient())
-            {
-                var endpoint = "http://localhost:5555/BlockChainApiRetriever/GetCurrentBlock";
+            {                
                 var response1 = await httpClient.GetAsync(endpoint);
                 var content = await response1.Content.ReadAsStringAsync();
                 _logger.LogInformation(generatedValue.EncriptString(content));

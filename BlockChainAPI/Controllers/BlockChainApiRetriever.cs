@@ -22,7 +22,7 @@ namespace BlockChainAPI.Controllers
         {
             try
             {
-                var connectionString = "Server=blockchainclientSQLdb;Initial Catalog=BlockChainProject;User Id=sa;Password=ForzaInterSempre69!;";
+                var connectionString = "Server=blockchain-sqldb;Initial Catalog=BlockChainProject;User Id=sa;Password=ForzaInterSempre69!;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {

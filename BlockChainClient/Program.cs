@@ -27,9 +27,8 @@ namespace BlockChainClient
                     logging.SetMinimumLevel(LogLevel.Information);
 
                 }).ConfigureAppConfiguration((context, configuration) =>
-    {
-        configuration.AddJsonFile($"appsetting.{context.HostingEnvironment.EnvironmentName}.json").Build();
-    })
-            ;
+                {
+                    configuration.AddJsonFile($"appsetting.{context.HostingEnvironment.EnvironmentName}.json").Build();
+                });
     }
 }

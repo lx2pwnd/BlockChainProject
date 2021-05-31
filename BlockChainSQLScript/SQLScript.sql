@@ -1,9 +1,7 @@
-﻿--use this script to create in your local SQL instance the db and the tables used by the project
-
--- if there are some errors caused by this script, select right click on SQLScript.sql 
--- and choose 'None' At 'Build Action' 
-
+﻿
 CREATE DATABASE BlockChainProject;
+
+GO 
 
 USE BlockChainProject;
 
