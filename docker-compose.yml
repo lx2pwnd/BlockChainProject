@@ -21,4 +21,5 @@ services:
     build:
       context: .
       dockerfile: BlockChainAPI/Dockerfile
-
+    ports: 
+      - "5555:80"
